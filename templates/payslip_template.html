@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <style>
+    @page {
+      size: A4;
+      margin: 1.8cm 1.5cm 1.5cm 1.5cm;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9pt;
+      color: #1a1a1a;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ── Outer wrapper ── */
+    .payslip {
+      width: 100%;
+      border: 2px solid #1a3a6e;
+    }
+
+    /* ── Shared table reset ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    /* ─────────── HEADER ─────────── */
+    .hdr-logo {
+      width: 110px;
+      padding: 8px 10px;
+      text-align: center;
+      vertical-align: middle;
+      border-right: 1px solid #1a3a6e;
+      border-bottom: 1px solid #1a3a6e;
+    }
+    .hdr-title {
+      padding: 8px 10px;
+      text-align: center;
+      vertical-align: middle;
+      border-right: 1px solid #1a3a6e;
+      border-bottom: 1px solid #1a3a6e;
+    }
+    .hdr-conf {
+      width: 90px;
+      padding: 8px 6px;
+      text-align: center;
+      vertical-align: middle;
+      border-bottom: 1px solid #1a3a6e;
+    }
+
+    .title-main {
+      font-size: 15pt;
+      font-weight: bold;
+      color: #1a3a6e;
+      letter-spacing: 3px;
+    }
+    .title-sub {
+      font-size: 10pt;
+      color: #555;
+      margin-top: 3px;
+    }
+    .conf-text {
+      font-size: 7.5pt;
+      font-weight: bold;
+      color: #cc0000;
+      letter-spacing: 1px;
+    }
+
+    /* ─────────── EMPLOYEE INFO ─────────── */
+    .emp-left {
+      width: 50%;
+      padding: 7px 12px;
+      border-right: 1px solid #1a3a6e;
+      border-bottom: 1px solid #1a3a6e;
+      line-height: 1.7;
+      vertical-align: top;
+    }
+    .emp-right {
+      width: 50%;
+      padding: 7px 12px;
+      border-bottom: 1px solid #1a3a6e;
+      line-height: 1.7;
+      vertical-align: top;
+    }
+
+    /* ─────────── EARNINGS TABLE ─────────── */
+    .th-desc {
+      width: 44%;
+      padding: 6px 10px;
+      text-align: left;
+      background-color: #d4e3f5;
+      border-right: 1px solid #93aece;
+      border-bottom: 1px solid #93aece;
+      font-weight: bold;
+    }
+    .th-earn {
+      width: 28%;
+      padding: 6px 10px;
+      text-align: right;
+      background-color: #d4e3f5;
+      border-right: 1px solid #93aece;
+      border-bottom: 1px solid #93aece;
+      font-weight: bold;
+    }
+    .th-ded {
+      width: 28%;
+      padding: 6px 10px;
+      text-align: right;
+      background-color: #d4e3f5;
+      border-bottom: 1px solid #93aece;
+      font-weight: bold;
+    }
+
+    .td-desc {
+      padding: 4px 10px;
+      border-right: 1px solid #dde5f0;
+      border-bottom: 1px solid #dde5f0;
+    }
+    .td-earn {
+      padding: 4px 10px;
+      text-align: right;
+      border-right: 1px solid #dde5f0;
+      border-bottom: 1px solid #dde5f0;
+    }
+    .td-ded {
+      padding: 4px 10px;
+      text-align: right;
+      border-bottom: 1px solid #dde5f0;
+    }
+
+    /* ─────────── TOTALS ─────────── */
+    .totals-desc {
+      padding: 5px 10px;
+      font-weight: bold;
+      background-color: #d4e3f5;
+      border-right: 1px solid #93aece;
+      border-bottom: 1px solid #93aece;
+    }
+    .totals-earn {
+      padding: 5px 10px;
+      text-align: right;
+      font-weight: bold;
+      background-color: #d4e3f5;
+      border-right: 1px solid #93aece;
+      border-bottom: 1px solid #93aece;
+    }
+    .totals-ded {
+      padding: 5px 10px;
+      text-align: right;
+      font-weight: bold;
+      background-color: #d4e3f5;
+      border-bottom: 1px solid #93aece;
+    }
+
+    /* ─────────── NET SALARY ─────────── */
+    .net-salary {
+      background-color: #1a3a6e;
+      color: #ffffff;
+      text-align: center;
+      padding: 11px 10px;
+      font-size: 12pt;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    /* ─────────── FOOTER NOTE ─────────── */
+    .footer-note {
+      margin-top: 18px;
+      font-size: 7.5pt;
+      color: #777;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="payslip">
+
+  <!-- ═══ HEADER ═══ -->
+  <table>
+    <tr>
+      <td class="hdr-logo">
+        {% if logo_b64 %}
+          <img src="{{ logo_b64 }}" style="max-height:62px; max-width:105px;"/>
+        {% else %}
+          <span style="font-weight:bold; font-size:10pt; color:#1a3a6e;">AISAT</span>
+        {% endif %}
+      </td>
+      <td class="hdr-title">
+        <div class="title-main">SALARY SLIP</div>
+        <div class="title-sub">{{ month }} {{ year }}</div>
+      </td>
+      <td class="hdr-conf">
+        <div class="conf-text">CONFIDENTIAL</div>
+      </td>
+    </tr>
+  </table>
+
+  <!-- ═══ EMPLOYEE INFO ═══ -->
+  <table>
+    <tr>
+      <td class="emp-left">
+        <strong>Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</strong> {{ faculty.name }}<br/>
+        <strong>Employee ID :</strong> {{ faculty.emp_id if faculty.emp_id else 'N/A' }}
+        {% if faculty.designation %}
+        <br/><strong>Designation&nbsp;:</strong> {{ faculty.designation }}
+        {% endif %}
+      </td>
+      <td class="emp-right">
+        <strong>Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</strong> {{ faculty.email if faculty.email else 'N/A' }}<br/>
+        <strong>Days Worked&nbsp;:</strong> {{ faculty.days_worked }} / {{ faculty.total_days }}
+        {% if faculty.department %}
+        <br/><strong>Department&nbsp;&nbsp;:</strong> {{ faculty.department }}
+        {% endif %}
+      </td>
+    </tr>
+  </table>
+
+  <!-- ═══ EARNINGS / DEDUCTIONS ═══ -->
+  <table>
+    <!-- Column headers -->
+    <tr>
+      <th class="th-desc">Description</th>
+      <th class="th-earn">Earnings</th>
+      <th class="th-ded">Deductions</th>
+    </tr>
+
+    <!-- Earnings rows -->
+    <tr>
+      <td class="td-desc">Basic</td>
+      <td class="td-earn">{{ faculty.basic | currency }}</td>
+      <td class="td-ded"></td>
+    </tr>
+    <tr>
+      <td class="td-desc">DA</td>
+      <td class="td-earn">{{ faculty.da | currency }}</td>
+      <td class="td-ded"></td>
+    </tr>
+    <tr>
+      <td class="td-desc">HRA</td>
+      <td class="td-earn">{{ faculty.hra | currency }}</td>
+      <td class="td-ded"></td>
+    </tr>
+    <tr>
+      <td class="td-desc">AGP</td>
+      <td class="td-earn">{{ faculty.agp | currency }}</td>
+      <td class="td-ded"></td>
+    </tr>
+    <tr>
+      <td class="td-desc">Interim Hike</td>
+      <td class="td-earn">{{ faculty.interim_hike | currency }}</td>
+      <td class="td-ded"></td>
+    </tr>
+    <tr>
+      <td class="td-desc">Others</td>
+      <td class="td-earn">{{ faculty.others_earning | currency }}</td>
+      <td class="td-ded"></td>
+    </tr>
+
+    <!-- Deduction rows -->
+    <tr>
+      <td class="td-desc">Prof Tax</td>
+      <td class="td-earn"></td>
+      <td class="td-ded">{{ faculty.prof_tax | currency }}</td>
+    </tr>
+    <tr>
+      <td class="td-desc">Sal. Adv</td>
+      <td class="td-earn"></td>
+      <td class="td-ded">{{ faculty.sal_adv | currency }}</td>
+    </tr>
+    <tr>
+      <td class="td-desc">Other Deductions</td>
+      <td class="td-earn"></td>
+      <td class="td-ded">{{ faculty.other_deductions | currency }}</td>
+    </tr>
+    <tr>
+      <td class="td-desc">ESI</td>
+      <td class="td-earn"></td>
+      <td class="td-ded">{{ faculty.esi | currency }}</td>
+    </tr>
+    <tr>
+      <td class="td-desc">EPF</td>
+      <td class="td-earn"></td>
+      <td class="td-ded">{{ faculty.epf | currency }}</td>
+    </tr>
+    <tr>
+      <td class="td-desc">TDS</td>
+      <td class="td-earn"></td>
+      <td class="td-ded">{{ faculty.tds | currency }}</td>
+    </tr>
+    <tr>
+      <td class="td-desc">LOP</td>
+      <td class="td-earn"></td>
+      <td class="td-ded">{{ faculty.lop | currency }}</td>
+    </tr>
+
+    <!-- Totals -->
+    <tr>
+      <td class="totals-desc">Gross Salary</td>
+      <td class="totals-earn">{{ faculty.gross_salary | currency }}</td>
+      <td class="totals-ded"></td>
+    </tr>
+    <tr>
+      <td class="totals-desc">Total Deduction</td>
+      <td class="totals-earn"></td>
+      <td class="totals-ded">{{ faculty.total_deduction | currency }}</td>
+    </tr>
+
+    <!-- Net Salary -->
+    <tr>
+      <td colspan="3" class="net-salary">
+        <div style="font-size: 10pt; letter-spacing: 2px;">NET SALARY</div>
+        <div style="font-size: 14pt; margin-top: 4px; font-weight: bold;">Rs. {{ faculty.net_salary | currency }}</div>
+      </td>
+    </tr>
+  </table>
+
+</div>
+
+<div class="footer-note">
+  This is a computer-generated payslip and does not require a signature. &nbsp;|&nbsp;
+  Albertian Institute of Science and Technology (AISAT), Kalamassery, Kochi.
+</div>
+
+</body>
+</html>

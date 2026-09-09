@@ -1,0 +1,75 @@
+﻿{% extends "base.html" %}
+{% block title %}Dashboard — AISAT Payslip Generator{% endblock %}
+
+{% block content %}
+<div class="dashboard-wrapper">
+
+  <!-- Upload Card -->
+  <div class="card" id="upload-card">
+    <div class="card-header">
+      <h2>&#128196; Generate Payslips</h2>
+      <p>Upload the faculty salary Excel file (<code>statements.xlsx</code> or <code>salary_filtered.xlsx</code>) to generate individual PDF payslips for all faculty members.</p>
+    </div>
+
+    <div class="drop-zone" id="drop-zone">
+      <div class="drop-zone-inner">
+        <div class="drop-icon">&#128196;</div>
+        <div class="drop-text" id="drop-text">
+          Drag &amp; drop your Excel file here<br/>
+          <span class="drop-hint">or click to browse</span>
+        </div>
+        <div class="file-name hidden" id="file-name"></div>
+      </div>
+      <input type="file" id="excel-file" accept=".xlsx,.xls" class="file-input"/>
+    </div>
+
+    <div class="upload-actions">
+      <button class="btn btn-primary" id="generate-btn" disabled>
+        &#9889; Generate Payslips
+      </button>
+    </div>
+  </div>
+
+  <!-- Progress Card (hidden until generation starts) -->
+  <div class="card hidden" id="progress-card">
+    <div class="card-header">
+      <h2>&#9889; Generating Payslips&hellip;</h2>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="progress-container">
+      <div class="progress-header">
+        <span class="progress-label" id="progress-label">Starting&hellip;</span>
+        <span class="progress-pct" id="progress-pct">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- Log panel -->
+    <div class="log-panel" id="log-panel" aria-live="polite" aria-label="Generation log">
+      <div class="log-placeholder">Generation log will appear here&hellip;</div>
+    </div>
+
+    <!-- Download button (hidden until done) -->
+    <div class="download-section hidden" id="download-section">
+      <div class="divider"></div>
+      <div class="download-row">
+        <div class="download-info">
+          <span class="success-badge">&#10003; Complete</span>
+          <span id="download-info-text">All payslips are ready.</span>
+        </div>
+        <a href="#" id="download-btn" class="btn btn-success btn-large">
+          &#11015; Download ZIP
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

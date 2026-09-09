@@ -1,0 +1,41 @@
+﻿{% extends "base.html" %}
+{% block title %}Login — AISAT Payslip Generator{% endblock %}
+
+{% block content %}
+<div class="login-wrapper">
+  <div class="login-card">
+
+    <div class="login-logo">
+      <img src="{{ url_for('static', filename='img/logo.jpeg') }}"
+           onerror="this.style.display='none'"
+           alt="AISAT Logo" style="max-height:80px;"/>
+    </div>
+
+    <h1 class="login-heading">Payslip Generator</h1>
+    <p class="login-subheading">Admin Login &mdash; Albertian Institute of Science and Technology</p>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for cat, msg in messages %}
+        <div class="alert alert-{{ cat }} login-alert">{{ msg }}</div>
+      {% endfor %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('login') }}" class="login-form">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username"
+               placeholder="Enter username" autocomplete="username" required/>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password"
+               placeholder="Enter password" autocomplete="current-password" required/>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full">
+        &#128274; Sign In
+      </button>
+    </form>
+
+  </div>
+</div>
+{% endblock %}
