@@ -1,10 +1,10 @@
-# AISAT Payslip Generator 📄⚡
+# AISAT Payslip Generator 📄
 
 A modern, lightweight Flask web application designed for **Albertian Institute of Science and Technology (AISAT)** to automate faculty payslip generation. Upload an Excel spreadsheet of monthly salary statements, watch individual branded PDF payslips get generated in real time with live progress logs, and download all slips packaged in a single ZIP archive.
 
 ---
 
-## ✨ Features
+## Features
 
 - **🔐 Admin Authentication**: Secure session-based login protected by environment variables (`.env`).
 - **📊 Smart Excel Ingestion**:
